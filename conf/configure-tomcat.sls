@@ -7,20 +7,24 @@ create tomcat webapp configuration:
 
 create directory for application:
   file.directory:
-    - name: /opt/webapps
+    - name: /opt/webapps/sample
     - makedirs: True
-
-tomcat restart:
-  service.running:
-    - name: tomcat
-    - watch:
-        - file: create tomcat webapp configuration
 
 download sample war file:
   file.managed:
     - name: /opt/webapps/sample.war
     - source: https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war
     - skip_verify: True
+    - mode: 755
 
-    
+extract war file:
+  archive.extracted:
+    - name: /opt/webapps/sample
+    - source: /opt/webapps/sample.war
+
+tomcat restart:
+  service.running:
+    - name: tomcat
+    - watch:
+        - archive: extract war file
 
