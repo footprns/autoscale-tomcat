@@ -7,7 +7,8 @@ create tomcat webapp configuration:
 
 create directory for application:
   file.directory:
-    - name: /opt/webapps/sample
+    - name: /opt/webapps
+    - makedirs: True
 
 tomcat restart:
   service.running:
