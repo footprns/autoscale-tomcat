@@ -44,7 +44,7 @@ module "appserver-security-group" {
   ]
 }
 
-
+/*
 module "appserver" {
   source = "./modules/ec2"
   name = "appserver"
@@ -60,3 +60,4 @@ module "appserver" {
 output "appserver-public_ip" {
   value = module.appserver.public_ip
 }
+*/

@@ -11,8 +11,10 @@ variable "security_groups" {
   type = list
 }
 variable "_count" {}
-
-
+variable "target_group_arns" {
+  type = list
+}
+variable "user_data" {}
 
 
 resource "aws_launch_configuration" "default" {
@@ -23,11 +25,7 @@ resource "aws_launch_configuration" "default" {
   instance_type = var.instance_type
   key_name = var.key_name
   security_groups = var.security_groups
-  user_data =<<EOM
-#!/bin/bash
-curl -O https://raw.githubusercontent.com/footprns/autoscale-tomcat/master/conf/install_salt.sh
-sudo bash install_salt.sh
-  EOM
+  user_data = var.user_data
   lifecycle {
     create_before_destroy = true
   }
@@ -40,8 +38,13 @@ resource "aws_autoscaling_group" "default" {
   min_size             = var.min_size
   max_size             = var.max_size
   vpc_zone_identifier = var.vpc_zone_identifier 
+  target_group_arns = var.target_group_arns
 
   lifecycle {
     create_before_destroy = true
   }
+}
+
+output "id" {
+  value = aws_autoscaling_group.default[*].id
 }

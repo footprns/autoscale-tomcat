@@ -1,0 +1,20 @@
+module "prod-autoscaling" {
+  source = "./modules/autoscaling"
+  _count = 1
+  name = "prod-"
+  image_id = "ami-04bc5b454e7132991" # app image
+  instance_type = "t2.micro"
+  key_name = module.imank-ssh-public-key.key_name
+  security_groups = ["${module.appserver-security-group.id}"]
+  target_group_arns = ["${module.prod-elb.arn}"]
+  user_data = null
+  min_size = 2
+  max_size = 3
+  vpc_zone_identifier = ["subnet-445cac0c", "subnet-6b07b832", "subnet-cab073ac"] 
+}
+
+module "prod-elb" {
+  source = "./modules/elb"
+  name = "prod-elb"
+  security_groups = ["${module.appserver-security-group.id}"]
+}
