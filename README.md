@@ -13,3 +13,5 @@ Assumtion:
 
 Action:
 1. Create jumphost
+
+![Diagram](/images/diagram.png)
