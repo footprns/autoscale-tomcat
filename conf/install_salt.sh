@@ -6,4 +6,7 @@ sudo yum -y install git
 sudo mkdir /srv/salt
 sudo git clone https://github.com/saltstack-formulas/tomcat-formula.git /srv/salt
 sudo salt-call --local state.sls tomcat --file-root=/srv/salt
-sudo curl -sSk https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war -o /usr/share/tomcat/webapps/sample.war
+
+sudo curl -sSk https://raw.githubusercontent.com/footprns/autoscale-tomcat/master/conf/configure-tomcat.sls -o /srv/salt/configure-tomcat.sls
+sudo salt-call --local state.sls configure-tomcat --file-root=/srv/salt
+# sudo curl -sSk https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war -o /opt/webapps/sample.war

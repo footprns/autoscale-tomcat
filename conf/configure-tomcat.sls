@@ -14,5 +14,12 @@ tomcat restart:
     - name: tomcat
     - watch:
         - file: create tomcat webapp configuration
+
+download sample war file:
+  file.managed:
+    - name: /opt/webapps/sample.war
+    - source: https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war
+    - skip_verify: True
+
     
 
