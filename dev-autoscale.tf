@@ -1,6 +1,6 @@
-module "custom-autoscaling" {
+module "dev-autoscaling" {
   source = "./modules/autoscaling"
-  _count = 1
+  _count = 0
   name = "cust01"
   image_id = "ami-0ec225b5e01ccb706" # amazon linux
   instance_type = "t2.micro"

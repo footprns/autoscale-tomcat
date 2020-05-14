@@ -25,7 +25,7 @@ resource "aws_launch_configuration" "default" {
   security_groups = var.security_groups
   user_data =<<EOM
 #!/bin/bash
-curl -O https://raw.githubusercontent.com/footprns/aws-sample/master/www/install_salt.sh
+curl -O https://raw.githubusercontent.com/footprns/autoscale-tomcat/master/conf/install_salt.sh
 sudo bash install_salt.sh
   EOM
   lifecycle {
